@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/vinaygahlawat/grocery-api/issues"
   },
-  "homepage": "https://github.com/vinaygahlawat/grocery-api#readme"
+  "homepage": "https://github.com/vinaygahlawat/grocery-api#readme",
+  "dependencies": {
+    "express": "^4.21.0"
+  }
 }
