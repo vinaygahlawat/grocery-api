@@ -43,12 +43,30 @@ app.post("/api/items", (request, response) => {
   }
 });
 
+app.put("/api/items", (request, response) => {
+  try {
+    console.log(`Received PUT request...`);
+    if (!request.body) {
+      response.status(500).send("Missing body");
+    } else {
+      const itemToUpdate = request.body.data.name;
+      const index = items.findIndex((item) => item.name == itemToUpdate);
+      items[index].have = request.body.data.have;
+      response.status(200).send(items[index]);
+    }
+  } catch (error) {
+    console.log(`Error with items PUT request: ${error}`);
+    response.status(500).sendStatus("Items PUT error", error);
+  }
+});
+
 app.delete("/api/items", (request, response) => {
   try {
     console.log(`Received DELETE request...`);
     if (!request.body) {
       response.status(500).send("Missing item name to delete");
     } else {
+      console.log(`DELETE request body: ${JSON.stringify(request.body)}`);
       const itemToDelete = request.body.name;
       const index = items.findIndex((item) => item.name == itemToDelete);
       items.splice(index, 1);
